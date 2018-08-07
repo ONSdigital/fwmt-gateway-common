@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class CreateJobRequest {
+public class FWMTCreateJobRequest {
 
   private  String jobIdentity;
 
