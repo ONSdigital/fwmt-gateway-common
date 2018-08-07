@@ -5,15 +5,11 @@ buildscript {
 	repositories {
 		mavenCentral()
 	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java-library'
+apply plugin: "maven"
+apply plugin: "maven-publish"
 
 group = 'uk.gov.ons.fwmt'
 version = '0.0.1-SNAPSHOT'
@@ -21,10 +17,23 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	mavenLocal()
 }
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
+}
+
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			groupId = group
+			artifactId = 'fwmt-gateway-common'
+			version = version
+
+			from components.java
+		}
+	}
 }

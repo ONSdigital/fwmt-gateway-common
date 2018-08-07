@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class CreateJobRequest {
+public class FWMTCreateJobRequest {
 
   private  String jobIdentity;
 
@@ -20,7 +21,7 @@ public class CreateJobRequest {
 
   private String mandatoryResourceAuthNo;
 
-  private Date dueDate;
+  private LocalDate dueDate;
 
   private Address address;
 
