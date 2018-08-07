@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -20,7 +21,7 @@ public class FWMTCreateJobRequest {
 
   private String mandatoryResourceAuthNo;
 
-  private Date dueDate;
+  private LocalDate dueDate;
 
   private Address address;
 

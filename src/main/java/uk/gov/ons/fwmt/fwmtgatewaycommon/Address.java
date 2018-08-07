@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -22,7 +24,7 @@ public class Address {
 
   private String postCode;
 
-  private float latitude;
+  private BigDecimal latitude;
 
-  private float longitude;
+  private BigDecimal longitude;
 }
