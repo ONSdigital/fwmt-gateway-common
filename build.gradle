@@ -4,9 +4,11 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		jcenter()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
 	}
 }
 
@@ -15,6 +17,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.jfrog.artifactory'
 
 group = 'uk.gov.ons.fwmt'
 version = '0.0.1-SNAPSHOT'
@@ -23,6 +26,20 @@ sourceCompatibility = 1.8
 repositories {
 	mavenCentral()
 	mavenLocal()
+    maven {
+        url = 'http://artifactory.rmdev.onsdigital.uk/artifactory/libs-snapshot'
+    }
+}
+
+artifactory {
+    contextUrl = 'http://artifactory.rmdev.onsdigital.uk/artifactory'
+    publish {
+        repository {
+            repoKey = 'libs-snapshot-local'
+            username = System.getenv('ARTIFACTORY_USERNAME')
+            password = System.getenv('ARTIFACTORY_PASSWORD')
+        }
+    }
 }
 
 publishing {
@@ -37,6 +54,9 @@ publishing {
 	}
 }
 
+artifactoryPublish {
+    publications ('maven')
+}
 
 dependencies {
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
