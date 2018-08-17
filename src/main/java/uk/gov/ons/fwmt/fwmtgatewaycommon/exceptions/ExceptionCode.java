@@ -44,7 +44,9 @@ public enum ExceptionCode {
 
   UNABLE_TO_SAVE_FILE(16),
 
-  BAD_USER_STATE(17);
+  BAD_USER_STATE(17),
+
+  INVALID_TM_RESPONSE(18);
 
   @Getter
   private final int value;
