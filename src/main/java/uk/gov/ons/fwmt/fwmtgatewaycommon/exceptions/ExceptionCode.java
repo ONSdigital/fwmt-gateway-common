@@ -54,7 +54,7 @@ public enum ExceptionCode {
 
   ExceptionCode(int value) {
     this.value = value;
-    this.code = "FWMT_JOB_SERVICE_" + String.format("%04d", this.getValue());
+    this.code = "FWMT_JOB_SERVICE_V2_" + String.format("%04d", this.getValue());
   }
 
   public String toString() {
