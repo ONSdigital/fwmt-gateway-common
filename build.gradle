@@ -60,4 +60,5 @@ artifactoryPublish {
 
 dependencies {
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.13.RELEASE'
 }
