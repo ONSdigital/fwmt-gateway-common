@@ -46,7 +46,11 @@ public enum ExceptionCode {
 
   BAD_USER_STATE(17),
 
-  INVALID_TM_RESPONSE(18);
+  INVALID_TM_RESPONSE(18),
+
+  INVALID_XML(19),
+
+  UNABLE_TO_MAP_JSON(20);
 
   @Getter
   private final int value;

@@ -256,4 +256,14 @@ public class FWMTCommonException extends RuntimeException {
         cause);
   }
 
+  public static FWMTCommonException makeUnableToParseXMLException(String reason, Throwable cause) {
+    return new FWMTCommonException(ExceptionCode.UNABLE_TO_SAVE_FILE, makeUnableToSaveFileExceptionMessage(reason),
+        cause);
+  }
+
+  public static FWMTCommonException makeUnableToMapObjectToJSON(String reason, Throwable cause) {
+    return new FWMTCommonException(ExceptionCode.UNABLE_TO_SAVE_FILE, makeUnableToSaveFileExceptionMessage(reason),
+        cause);
+  }
+
 }
