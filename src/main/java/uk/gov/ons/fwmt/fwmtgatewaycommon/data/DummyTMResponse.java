@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.fwmtgatewaycommon;
+package uk.gov.ons.fwmt.fwmtgatewaycommon.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
