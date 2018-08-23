@@ -1,4 +1,4 @@
-package uk.gov.ons.fwmt.fwmtgatewaycommon;
+package uk.gov.ons.fwmt.fwmtgatewaycommon.data;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
