@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class FWMTCancelJobRequest implements Serializable {
+public class FWMTCancelJobRequest {
   private String actionType;
   private String jobIdentity;
   private String reason;
