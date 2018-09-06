@@ -12,6 +12,8 @@ import java.io.Serializable;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class FWMTCancelJobRequest {
   private String actionType;
+
   private String jobIdentity;
+
   private String reason;
 }

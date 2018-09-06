@@ -11,13 +11,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Address {
-
   private String line1;
-
   private String line2;
-
   private String line3;
-
   private String line4;
 
   private String townName;
@@ -25,6 +21,5 @@ public class Address {
   private String postCode;
 
   private BigDecimal latitude;
-
   private BigDecimal longitude;
 }
