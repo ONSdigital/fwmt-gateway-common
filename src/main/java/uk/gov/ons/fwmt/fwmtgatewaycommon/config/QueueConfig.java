@@ -22,4 +22,13 @@ public class QueueConfig {
 
   public static final String JOB_SVC_RESPONSE_ROUTING_KEY = "jobsvc.job.response";
 
+  // Dead Letter Queues
+  public static final String ADAPTER_JOB_SVC_DLQ = "adapter-jobSvc.DLQ";
+
+  public static final String JOB_SVC_ADAPTER_DLQ = "jobSvc-adapter.DLQ";
+
+  public static final String RM_ADAPTER_DLQ = "rm-adapter.DLQ";
+
+  public static final String ADAPTER_RM_DLQ = "adapter-rm.DLQ";
+
 }
