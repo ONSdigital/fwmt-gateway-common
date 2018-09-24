@@ -61,4 +61,6 @@ artifactoryPublish {
 dependencies {
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.13.RELEASE'
+	compile group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.2.RELEASE'
+	compile group: 'org.springframework.amqp', name: 'spring-amqp', version: '1.7.5.RELEASE'
 }
