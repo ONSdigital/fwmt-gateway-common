@@ -1,17 +1,22 @@
 language: java
 jdk: oraclejdk8
-services:
-- docker
+install: true
 script:
-- "./gradlew check --info"
-after_success:
-- bash <(curl -s https://codecov.io/bash)
+- if [[ $TRAVIS_COMMIT_MESSAGE != 'JENKINS RELEASE UPDATE' ]]; then ./gradlew build
+  --info; fi
 env:
   global:
-    - SPRING_PROFILES_ACTIVE=default,integration-tests
+  - SPRING_PROFILES_ACTIVE=default,integration-tests
+  - secure: ORkpGSX/xxkR/MN6huR/s4YanL+TfJLV+OqsJXjXGldubUX98JTwNMSGOzo5Ma05BvAM/j4Hd7eSvimhOclbygTd+/tPZmQgJ84DJ4UpZkAU2l39E2emZAUwf8i+m0uX0U4GQtf9sthdC8e8ddUikNNEmOOCI4HAzLHpwK+GyTKannCN3ikLQg2AMdVn6zXfzbVyCP8BjcpTOTgoRXlA/OMHU4XTOjNprB3j/2y3P8McUB+9Jko4ac2aJroWWALnPhUcUM9oM8w+Rd7xbTxD/DQ+83UQtSJh2B7JnYMAuxpSClxcJ8rWpdpsgivF/yKXIonlFK8S+t9Z5PrOHxVJjMHs/m0iVqyq3iQBKnTMWf/VFy4NyjAb2znrMIOh5cv7TQhpJTfeNWOkOVHumSEHGvYgx5PaRaBwXiyJkz/GxjxXO2xUBYIzTmVcxIuCI3pnRu3dIC5T+rHEGtb52GS1avVbPpxrQ9FqjyL7EQoZQp/vU54Gqrb2zTI2Guvcdj8xNCYKBHRSaB33T6f3Zp4YE4+C8wHk0JdvnHnoSj7jRgPhYMONZG2sURQcnwjLbtgm6Owpw5Rv+P9P9BPt3EiYZYJ4zE0kvG9e2MSNVxpfhfjtxBIJl+sB3r1hRv3wFxIkTukyW2wml1PXhJKTy5gbmdJwvHGSmthkxLs7KgIj9hM=
+  - secure: lKVSjHFflaqCJgw7gt2RCgng7jBsp2xhGnVjJZyF/aDzW5NxESjNUTaN0++aoohxt93BGJl71AAQ82/j3Wt2E6+d74+dEdaoibzRwUxCM3wwvioit3ULEb7PFeZRtltHepWnejBaNqt1gJH1yxMwNJCwPw5ObqYbAW7qi9nesnWCsfOP87q09XkeXtxaaIRym6qWBu4bDDBn5zjV6m14lbbksQxQPukAaq2zvV4THnWbYnJBvuR6HXU1Y5lfzFV6InImOrJ9K6H5J6wU1U5TVb5h1PYG1/Zs52+MZSg01gWlOVAwBPVA2zxsrfGwQ7wgACLcTVcWOC7FdxSyizizhKI4R+cX+FMULW/PPDQjcyHcOmoh4VY56UZJr7KQx6ZI3C4HlvOWp+kLF96nq1S5LxPopClMhNt1Wmm2hxkPA2B/bXYgtshIo2MZtljj3QYZJ+4T+P0KE8MxuTSM4HHExEZW9MAC3J7bmoSndmXjBaLavB0xLC3zjL35LlEccpetkdH44fbfC4rwv//ckJDseuYHMqqnftXXc/OCYQDxK6C1DJ92/uMMTj2t6/qUS+pSYeJM59gE+SWdJ2mtgk1v6MBQW2v82/tznKAPod0mZMqmg5ah3GqF9e94zWIJ/cftyiY881MHQcyx8aFaisDdFpBJkx+bvs3RsrAzxWzlaWI=
 branches:
   only:
   - master
 notifications:
   slack:
     secure: gwaAvSUbGYRzIkkdWrfyacjcUfaW5RAnUDmzHCr8KDrXYDl00bANsCo7miNw2l9GnSp4JXc70Pokaya7LSOhO+YY3r1iaI5dpt9vkL5oqcxz7/qXtH2hHB7idJNUSHsgQhcX1q3eP7HFPrRf3CLtbqIL4zbNpRJkBoy9qgPiRkoVhXQ1wasHExiFaJQ0pbblu6E0XQGa7cJqJic7gVmY94iyFO1N4D5pTOLTxAkY/TxS5ESrkvLf/T5T08LTyClTsuRhrzC3e9nFzETRwisoP/tcFnTX38iJ4sTS5NRFTzhNnzrbJpu3SjUZ81FbIgNO4gGBkm7PA5G1MG258O0am3jxGwNpggIle7YJAQ/m3ZAZWCnfRA52avHEOj1Jt5NQpnXHumTOVLFgvQ0CfITitmpOG01K5vs++JJ/9prCLj0R9RzmRd/YWZWclk0EcYvhTq+oFTollY2kMaUORKSis1i7CkcN1l4kvV2A37lFq0JC29xYRsxhs+1gJsDlCh8dcWx/HisTG7XHw5dFqiQEOMXhS4NwFKJXe9BVkqL3VdaY1WnLzAWT54pHFDjfIC6VoYAwT4pVTDvz2rARMf+uc/64bz7wHtMgy7GUEbjX3QIxAwXNUBWFJCnax0RGhbQvWBFL3vZZmCt2RP029NUdP1F7nnYzy+YDXIvUltXWBow=
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+- if [[ "$TRAVIS_BRANCH" = "master" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]] &&
+  [[ $TRAVIS_COMMIT_MESSAGE != "JENKINS RELEASE UPDATE" ]]; ./gradlew artifactPublish;
+  fi
