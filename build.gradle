@@ -1,3 +1,5 @@
+import org.ajoberstar.grgit.*
+
 buildscript {
 	ext {
 		springBootVersion = '2.0.4.RELEASE'
@@ -9,6 +11,8 @@ buildscript {
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
+		classpath 'org.ajoberstar:gradle-git:1.4.2'
+
 	}
 }
 
@@ -18,10 +22,13 @@ apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'org.ajoberstar.grgit'
+
 
 group = 'uk.gov.ons.fwmt'
-version = '0.0.5-SNAPSHOT'
+version = '0.0.6-SNAPSHOT'
 sourceCompatibility = 1.8
+def repo = Grgit.open('.')
 
 repositories {
 	mavenCentral()
@@ -40,6 +47,15 @@ artifactory {
             password = System.getenv('ARTIFACTORY_PASSWORD')
         }
     }
+}
+
+jar {
+	group = 'uk.gov.ons.fwmt'
+	baseName = 'fwmt-job-service'
+	manifest {
+		attributes(["Git-Commit": repo.head().getAbbreviatedId(7),
+					"Git-Branch": repo.branch.getCurrent().getName() ], "common")
+	}
 }
 
 publishing {
