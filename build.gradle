@@ -19,23 +19,23 @@ apply plugin: 'eclipse'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.jfrog.artifactory'
 
-group = 'uk.gov.ons.fwmt'
-version = '0.0.2-SNAPSHOT'
+group = 'uk.gov.ons.fwmt'erQueues
+version = '0.0.4-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
 	mavenLocal()
     maven {
-        url = 'http://artifactory.rmdev.onsdigital.uk/artifactory/libs-snapshot'
+        url = 'http://artifactory.rmdev.onsdigital.uk/artifactory/libs-release-local'
     }
 }
 
 artifactory {
-    contextUrl = 'http://artifactory.rmdev.onsdigital.uk/artifactory'
+    contextUrl = 'http://artifactory-sdc.onsdigital.uk/artifactory/'
     publish {
         repository {
-            repoKey = 'libs-snapshot-local'
+            repoKey = 'libs-release-local'
             username = System.getenv('ARTIFACTORY_USERNAME')
             password = System.getenv('ARTIFACTORY_PASSWORD')
         }
@@ -61,4 +61,6 @@ artifactoryPublish {
 dependencies {
 	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.13.RELEASE'
+	compile group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.2.RELEASE'
+	compile group: 'org.springframework.amqp', name: 'spring-amqp', version: '1.7.5.RELEASE'
 }
