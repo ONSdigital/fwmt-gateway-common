@@ -19,7 +19,7 @@ apply plugin: 'eclipse'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.jfrog.artifactory'
 
-group = 'uk.gov.ons.fwmt'erQueues
+group = 'uk.gov.ons.fwmt'
 version = '0.0.4-SNAPSHOT'
 sourceCompatibility = 1.8
 
