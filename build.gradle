@@ -20,14 +20,14 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.jfrog.artifactory'
 
 group = 'uk.gov.ons.fwmt'
-version = '0.0.5-RELEASE'
+version = '0.0.5-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
 	mavenLocal()
     maven {
-        url = 'http://artifactory.rmdev.onsdigital.uk/artifactory/libs-release-local'
+        url = 'http://artifactory.rmdev.onsdigital.uk/artifactory/libs-snapshot-local'
     }
 }
 
@@ -35,7 +35,7 @@ artifactory {
     contextUrl = 'http://artifactory-sdc.onsdigital.uk/artifactory/'
     publish {
         repository {
-            repoKey = 'libs-release-local'
+            repoKey = 'libs-snapshot-local'
             username = System.getenv('ARTIFACTORY_USERNAME')
             password = System.getenv('ARTIFACTORY_PASSWORD')
         }
