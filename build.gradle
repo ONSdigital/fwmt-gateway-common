@@ -51,7 +51,7 @@ artifactory {
 
 jar {
 	group = 'uk.gov.ons.fwmt'
-	baseName = 'fwmt-job-service'
+	baseName = 'fwmt-gateway-common'
 	manifest {
 		attributes(["Git-Commit": repo.head().getAbbreviatedId(7),
 					"Git-Branch": repo.branch.getCurrent().getName() ], "common")
