@@ -1,6 +1,6 @@
 package uk.gov.ons.fwmt.fwmtgatewaycommon.config;
 
-public class QueueConfig {
+public class QueueNames {
 
   // Queues
   public static final String RM_JOB_SVC_EXCHANGE = "rm-jobsvc-exchange";
