@@ -11,7 +11,7 @@ public class QueueNames {
 
   public static final String ADAPTER_TO_RM_QUEUE = "adapter-rm";
 
-  private static final String ACTION_FIELD_QUEUE = "Action.Field";
+  public static final String ACTION_FIELD_QUEUE = "Action.Field";
 
   // Routing Keys
   public static final String RM_REQUEST_ROUTING_KEY = "rm.job.request";
@@ -22,7 +22,7 @@ public class QueueNames {
 
   public static final String JOB_SVC_RESPONSE_ROUTING_KEY = "jobsvc.job.response";
 
-  private static final String ACTION_FIELD_BINDING = "Action.Field.binding";
+  public static final String ACTION_FIELD_BINDING = "Action.Field.binding";
 
   public static final String ACTION_DEADLETTER_EXCHANGE = "action-deadletter-exchange";
 
@@ -35,6 +35,6 @@ public class QueueNames {
 
   public static final String ADAPTER_RM_DLQ = "adapter-rm.DLQ";
 
-  private static final String ACTION_FIELD_DLQ = "Action.FieldDLQ";
+  public static final String ACTION_FIELD_DLQ = "Action.FieldDLQ";
 
 }
