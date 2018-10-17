@@ -27,7 +27,7 @@ apply plugin: 'org.ajoberstar.grgit'
 sourceSets.main.java.srcDirs = ['build/generated-sources/jaxb','src/main/java']
 
 group = 'uk.gov.ons.fwmt'
-version = '0.0.13-SNAPSHOT'
+version = '0.0.14-SNAPSHOT'
 sourceCompatibility = 1.8
 def repo = Grgit.open('.')
 
