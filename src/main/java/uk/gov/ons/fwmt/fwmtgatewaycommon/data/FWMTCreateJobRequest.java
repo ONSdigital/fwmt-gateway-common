@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +16,7 @@ public class FWMTCreateJobRequest implements Serializable {
 
   private String actionType;
 
-  private  String jobIdentity;
+  private String jobIdentity;
 
   private String surveyType;
 
@@ -26,5 +27,7 @@ public class FWMTCreateJobRequest implements Serializable {
   private LocalDate dueDate;
 
   private Address address;
+
+  private Map<String, String> additionalProperties;
 
 }
