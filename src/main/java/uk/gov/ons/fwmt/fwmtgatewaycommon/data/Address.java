@@ -27,4 +27,7 @@ public class Address {
   private BigDecimal latitude;
 
   private BigDecimal longitude;
+
+  private String organisationName;
+
 }

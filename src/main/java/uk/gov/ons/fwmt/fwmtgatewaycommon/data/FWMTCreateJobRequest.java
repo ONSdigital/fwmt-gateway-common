@@ -28,6 +28,8 @@ public class FWMTCreateJobRequest implements Serializable {
 
   private Address address;
 
+  private Contact contact;
+
   private Map<String, String> additionalProperties;
 
 }
