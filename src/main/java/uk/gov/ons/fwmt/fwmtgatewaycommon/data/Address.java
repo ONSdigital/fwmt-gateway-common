@@ -28,6 +28,6 @@ public class Address {
 
   private BigDecimal longitude;
 
-  private String organizationName;
+  private String organisationName;
 
 }
