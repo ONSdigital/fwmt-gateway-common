@@ -1,5 +1,3 @@
-import org.ajoberstar.grgit.*
-
 buildscript {
 	ext {
 		springBootVersion = '2.0.4.RELEASE'
@@ -27,9 +25,8 @@ apply plugin: 'org.ajoberstar.grgit'
 sourceSets.main.java.srcDirs = ['build/generated-sources/jaxb','src/main/java']
 
 group = 'uk.gov.ons.fwmt'
-version = '0.0.16-SNAPSHOT'
-sourceCompatibility = 1.8
-def repo = Grgit.open('.')
+version = '3.0.0-SNAPSHOT'
+sourceCompatibility = 11
 
 configurations {
 	jaxb
@@ -95,8 +92,8 @@ jar {
 	group = 'uk.gov.ons.fwmt'
 	baseName = 'fwmt-gateway-common'
 	manifest {
-		attributes(["Git-Commit": repo.head().getAbbreviatedId(7),
-					"Git-Branch": repo.branch.getCurrent().getName() ], "common")
+		attributes(["Git-Commit": grgit.head().getAbbreviatedId(7),
+					"Git-Branch": grgit.branch.getCurrent().getName() ], "common")
 	}
 }
 
@@ -117,10 +114,23 @@ artifactoryPublish {
 }
 
 dependencies {
-	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
+	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+	compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
+	compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.1'
+	compile group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.3.1'
+	compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+
+	jaxb group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+	jaxb group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
+	jaxb group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.1'
+	jaxb group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.3.1'
+	jaxb group: 'javax.activation', name: 'activation', version: '1.1.1'
+
+	annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.4'
+	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.4'
+
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.13.RELEASE'
 	compile group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.2.RELEASE'
 	compile group: 'org.springframework.amqp', name: 'spring-amqp', version: '1.7.5.RELEASE'
 	compile(files(genJaxb.classesDir).builtBy(genJaxb))
-	jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
 }
