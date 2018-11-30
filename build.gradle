@@ -36,7 +36,7 @@ repositories {
 	mavenCentral()
 	mavenLocal()
     maven {
-        url = 'http://artifactory.rmdev.onsdigital.uk/artifactory/libs-snapshot-local'
+        url = 'http://artifactory.rmdev.onsdigital.uk/artifactory/libs-snapshot'
     }
 }
 
