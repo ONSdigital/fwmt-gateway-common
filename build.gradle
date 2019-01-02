@@ -1,19 +1,19 @@
-import org.ajoberstar.grgit.*
+import org.ajoberstar.grgit.Grgit
 
 buildscript {
-	ext {
-		springBootVersion = '2.0.4.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-		jcenter()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
-		classpath 'org.ajoberstar:gradle-git:1.4.2'
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:latest.release'
+        classpath 'org.ajoberstar:gradle-git:1.4.2'
 
-	}
+    }
 }
 
 apply plugin: 'java'
@@ -24,20 +24,20 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'org.ajoberstar.grgit'
 
-sourceSets.main.java.srcDirs = ['build/generated-sources/jaxb','src/main/java']
+sourceSets.main.java.srcDirs = ['build/generated-sources/jaxb', 'src/main/java']
 
 group = 'uk.gov.ons.fwmt'
 version = '0.0.16-SNAPSHOT'
 sourceCompatibility = 1.8
-def repo = Grgit.open('.')
+def repo = Grgit.open(projectDir)
 
 configurations {
-	jaxb
+    jaxb
 }
 
 repositories {
-	mavenCentral()
-	mavenLocal()
+    mavenCentral()
+    mavenLocal()
     maven {
         url = 'http://artifactory.rmdev.onsdigital.uk/artifactory/libs-snapshot-local'
     }
@@ -55,72 +55,72 @@ artifactory {
 }
 
 task genJaxb {
-	ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
-	ext.classesDir = "${buildDir}/classes/jaxb"
-	ext.schema = "${projectDir}/src/main/resources/wsdl"
-	ext.schemaXSD = "${projectDir}/src/main/resources/xsd"
+    ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
+    ext.classesDir = "${buildDir}/classes/jaxb"
+    ext.schema = "${projectDir}/src/main/resources/wsdl"
+    ext.schemaXSD = "${projectDir}/src/main/resources/xsd"
 
-	outputs.dir classesDir
+    outputs.dir classesDir
 
-	doLast() {
-		project.ant {
-			taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
-					classpath: configurations.jaxb.asPath
-			mkdir(dir: sourcesDir)
-			mkdir(dir: classesDir)
+    doLast() {
+        project.ant {
+            taskdef name: 'xjc', classname: 'com.sun.tools.xjc.XJCTask',
+                    classpath: configurations.jaxb.asPath
+            mkdir(dir: sourcesDir)
+            mkdir(dir: classesDir)
 
-			xjc(destdir: sourcesDir) {
-				produces(dir: sourcesDir, includes: "**/*.java")
-				schema(dir: schemaXSD, includes: '*.xsd')
-			}
+            xjc(destdir: sourcesDir) {
+                produces(dir: sourcesDir, includes: '**/*.java')
+                schema(dir: schemaXSD, includes: '*.xsd')
+            }
 
-			javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
-					debugLevel: "lines,vars,source",
-					classpath: configurations.jaxb.asPath) {
-				src(path: sourcesDir)
-				include(name: "**/*.java")
-				include(name: "*.java")
-			}
+            javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
+                    debugLevel: 'lines,vars,source',
+                    classpath: configurations.jaxb.asPath) {
+                src(path: sourcesDir)
+                include(name: '**/*.java')
+                include(name: '*.java')
+            }
 
-			copy(todir: classesDir) {
-				fileset(dir: sourcesDir, erroronmissingdir: false) {
-					exclude(name: "**/*.java")
-				}
-			}
-		}
-	}
+            copy(todir: classesDir) {
+                fileset(dir: sourcesDir, erroronmissingdir: false) {
+                    exclude(name: '**/*.java')
+                }
+            }
+        }
+    }
 }
 
 jar {
-	group = 'uk.gov.ons.fwmt'
-	baseName = 'fwmt-gateway-common'
-	manifest {
-		attributes(["Git-Commit": repo.head().getAbbreviatedId(7),
-					"Git-Branch": repo.branch.getCurrent().getName() ], "common")
-	}
+    group = 'uk.gov.ons.fwmt'
+    baseName = 'fwmt-gateway-common'
+    manifest {
+        attributes(['Git-Commit': repo.head().getAbbreviatedId(7),
+                    'Git-Branch': repo.branch.getCurrent().getName()], 'common')
+    }
 }
 
 publishing {
-	publications {
-		maven(MavenPublication) {
-			groupId = group
-			artifactId = 'fwmt-gateway-common'
-			version = version
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = 'fwmt-gateway-common'
+            version = version
 
-			from components.java
-		}
-	}
+            from components.java
+        }
+    }
 }
 
 artifactoryPublish {
-    publications ('maven')
+    publications('maven')
 }
 
 dependencies {
-	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.13.RELEASE'
-	compile group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.2.RELEASE'
-	compile group: 'org.springframework.amqp', name: 'spring-amqp', version: '1.7.5.RELEASE'
-	compile(files(genJaxb.classesDir).builtBy(genJaxb))
-	jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.13.RELEASE'
+    compile group: 'org.springframework.retry', name: 'spring-retry', version: '1.2.2.RELEASE'
+    compile group: 'org.springframework.amqp', name: 'spring-amqp', version: '1.7.5.RELEASE'
+    compile(files(genJaxb.classesDir).builtBy(genJaxb))
+    jaxb 'com.sun.xml.bind:jaxb-xjc:2.1.7'
 }
